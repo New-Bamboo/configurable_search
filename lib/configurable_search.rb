@@ -21,7 +21,7 @@ module ConfigurableSearch
     @queries = self.class.allowed_params.inject({}) do |memo,(k,v)|
       value = params[k]
 
-      if value && (v[:options].blank? || Array(value).all?{|a| v[:options].include? a})
+      if value && (v[:options].blank? || v[:options].is_a?(Symbol) || Array(value).all?{|a| v[:options].include? a})
         memo[k] = value
       else
         memo[k] = v.fetch(:default, '')
