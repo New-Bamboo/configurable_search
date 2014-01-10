@@ -58,8 +58,9 @@ module ConfigurableSearch
 
   protected
 
-  def search(&block)
-    s = Tire::Search::Search.new(self.class.search_source.tire.index.name, wrapper: self.class.search_source)
+  def search(options = {}, &block)
+    options = options.merge(wrapper: self.class.search_source)
+    s = Tire::Search::Search.new(self.class.search_source.tire.index.name, options)
     yield s
   end
 
