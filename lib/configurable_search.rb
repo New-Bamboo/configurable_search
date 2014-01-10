@@ -62,6 +62,7 @@ module ConfigurableSearch
     options = options.merge(wrapper: self.class.search_source)
     s = Tire::Search::Search.new(self.class.search_source.tire.index.name, options)
     yield s
+    s.results
   end
 
   module ClassMethods
