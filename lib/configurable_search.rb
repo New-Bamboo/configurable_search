@@ -43,7 +43,11 @@ module ConfigurableSearch
       memo[k] = {}
       memo[k][:value] = v.is_a?(Array) ? v.join(',') : v
       memo[k][:label] = self.class.allowed_params[k][:label]
-      memo[k][:options] = self.class.allowed_params[k][:options] if self.class.allowed_params[k][:options]
+
+      if options = self.class.allowed_params[k][:options]
+        options = instance_eval(&options) if options.respond_to?(:to_proc)
+        memo[k][:options] = options
+      end
       memo
     end
   end

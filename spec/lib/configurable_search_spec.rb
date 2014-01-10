@@ -13,4 +13,22 @@ describe ConfigurableSearch do
       }.must_raise NotImplementedError
     end
   end
+
+  describe "#search_option" do
+    subject { search_class }
+
+    describe "options" do
+
+      before do
+        subject.send(:define_method, :jellies) do
+          %w(strawberry raspberry lime lemon pork)
+        end
+      end
+
+      it "evaluates in context of the instance of responds to #to_proc?" do
+        subject.search_option :jelly, options: :jellies
+        subject.new({}).options_for(:jelly).must_equal %w(strawberry raspberry lime lemon pork)
+      end
+    end
+  end
 end
