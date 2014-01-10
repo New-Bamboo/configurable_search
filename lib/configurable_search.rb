@@ -1,5 +1,6 @@
 require 'active_support/concern'
 require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/class/attribute'
 require 'active_model/naming'
 require 'active_model/conversion'
 require 'tire'
@@ -59,7 +60,6 @@ module ConfigurableSearch
   end
 
   module ClassMethods
-
     def search_for(source_class)
       self.search_source = source_class
     end
