@@ -74,7 +74,7 @@ module ConfigurableSearch
       @allowed_params ||= {}
     end
 
-    def search_option(name, opts)
+    def search_option(name, opts = {})
       allowed_params[name] = opts
     end
   end
